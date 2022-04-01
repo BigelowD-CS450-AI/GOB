@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Action
 {
-    protected Dictionary<GoalType, float> goalChanges;
+    public Dictionary<GoalType, float> goalChanges;
     public ActionType type;
     protected float duration;
     public float getGoalChange(Goal goal)
@@ -17,4 +17,4 @@ public abstract class Action
     }
 }
 
-public enum ActionType {Drink_Soda, Drink_Water, Eat_Meal, Eat_Snack, Go_To_Bathroom, Sleep_In_Bed, Sleep_On_Couch}
+public enum ActionType {Drink_Soda, Drink_Water, Eat_Meal, Eat_Snack, Go_To_Bathroom, Sleep_In_Bed, Sleep_On_Couch, Do_Nothing}

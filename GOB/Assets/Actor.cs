@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Actor : MonoBehaviour
 {
+    public Text[] GoalValTextLabels;
+    public Text CurrentAction;
+    public Text[] GoalModTextLabels;
     float hoursPassed = 0;
     Action[] actions =
     {
@@ -14,13 +18,16 @@ public class Actor : MonoBehaviour
         new Go_To_Bathroom(),
         new Sleep_In_Bed(),
         new Sleep_On_Couch(),
+        new Do_Nothing()
     };
 
     Goal[] goals =
     {
-        new Eat(2),
         new Bathroom(1),
-        new Sleep(0)
+        new Depression(0),
+        new Eat(2),
+        new Sleep(0),
+        new Thirst(1)
     };
 
     public void Start()
@@ -29,34 +36,47 @@ public class Actor : MonoBehaviour
     }
     public void Act(Action action)
     {
+        int i = 0;
+        foreach (Goal goal in goals)
+        {
+            goal.changeInsistance(action.goalChanges[goal.type]);
+            GoalValTextLabels[i].text = goal.getValue().ToString();
+            GoalModTextLabels[i].text = action.goalChanges[goal.type].ToString();
+            ++i;
+        }
         switch (action.type)
         {
             case ActionType.Drink_Soda:
-                Debug.Log("Hour: " + hoursPassed + "  Drinking Soda");
+                CurrentAction.text = "Drinking Soda";
                 break;
             case ActionType.Drink_Water:
-                Debug.Log("Hour: " + hoursPassed + "  Drinking Water"); 
+                CurrentAction.text = "Drinking Water"; 
                 break;
             case ActionType.Eat_Meal:
-                Debug.Log("Hour: " + hoursPassed + "  Eating a Meal");
+                CurrentAction.text = "Eating a Meal";
                 break;
             case ActionType.Eat_Snack:
-                Debug.Log("Hour: " + hoursPassed + "  Eating a Snack");
+                CurrentAction.text = "Eating a Snack";
                 break;
             case ActionType.Go_To_Bathroom:
-                Debug.Log("Hour: " + hoursPassed + "  Going to Bathroom");
+                CurrentAction.text = "Going to Bathroom";
                 break;
             case ActionType.Sleep_In_Bed:
-                Debug.Log("Hour: " + hoursPassed + "  Seeping in the Bed");
+                CurrentAction.text = "Seeping in the Bed";
                 break;
             case ActionType.Sleep_On_Couch:
-                Debug.Log("Hour: " + hoursPassed + "  Sleeping on the Couch");
+                CurrentAction.text = "Sleeping on the Couch";
+                break;
+            case ActionType.Do_Nothing:
+                CurrentAction.text = "Doing nothing";
                 break;
             default:
-                Debug.Log("Shouldnt be here");
+                CurrentAction.text = "ERROR!!";
                 break;
         }
     }
+    //1 hour = SecondsPerHour seconds
+    const float SecondsPerHour = 3.0f;
     IEnumerator DecideAndDoAction()
     {
         //Debug.Log("Made to cooroutine");
@@ -65,7 +85,7 @@ public class Actor : MonoBehaviour
         foreach (Goal goal in goals)
             goal.passTime(action.getDuration());
         hoursPassed += action.getDuration();
-        yield return new WaitForSeconds(action.getDuration());
+        yield return new WaitForSeconds(action.getDuration() * SecondsPerHour);
         StartCoroutine(DecideAndDoAction());
     }
 

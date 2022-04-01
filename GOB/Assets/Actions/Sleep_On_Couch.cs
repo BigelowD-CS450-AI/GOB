@@ -7,13 +7,14 @@ public class Sleep_On_Couch : Action
     public Sleep_On_Couch()
     {
         type = ActionType.Sleep_On_Couch;
-        duration = 2.0f;
+        duration = 1.5f;
         goalChanges = new Dictionary<GoalType, float>
         {
-            {GoalType.Bathroom, 1 },
+            {GoalType.Bathroom, 0 },
+            {GoalType.Depression, 3 },
             {GoalType.Eat, 0 },
             {GoalType.Sleep, -2 },
-            {GoalType.Thirst, 1 }
+            {GoalType.Thirst, 0 }
         };
     }
 }

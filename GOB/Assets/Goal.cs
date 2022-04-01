@@ -23,6 +23,10 @@ public abstract class Goal
     {
         value = Mathf.Min(value + passedTime * change, 5);
     }
+    public void changeInsistance(float changeAmount)
+    {
+        value = Mathf.Clamp(value + changeAmount, 0.0f, 5.0f);
+    }
 }
 
-public enum GoalType { Eat, Sleep, Bathroom, Thirst};
+public enum GoalType { Eat, Sleep, Bathroom, Thirst, Depression};
