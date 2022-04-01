@@ -76,7 +76,7 @@ public class Actor : MonoBehaviour
         }
     }
     //1 hour = SecondsPerHour seconds
-    const float SecondsPerHour = 3.0f;
+    const float SecondsPerHour = 5.0f;
     IEnumerator DecideAndDoAction()
     {
         //Debug.Log("Made to cooroutine");
