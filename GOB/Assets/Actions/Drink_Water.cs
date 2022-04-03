@@ -10,8 +10,8 @@ public class Drink_Water : Action
         duration = .5f;
         goalChanges = new Dictionary<GoalType, float>
         {
-            {GoalType.Bathroom, 3 },
-            {GoalType.Depression, -1 },
+            {GoalType.Bathroom, 2 },
+            {GoalType.Depression, -0.25f },
             {GoalType.Eat, 0 },
             {GoalType.Sleep, 0 },
             {GoalType.Thirst, -5 }

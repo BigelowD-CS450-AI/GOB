@@ -48,27 +48,43 @@ public class Actor : MonoBehaviour
         {
             case ActionType.Drink_Soda:
                 CurrentAction.text = "Drinking Soda";
+                transform.position = new Vector3(0.0f, 1.5f, 7.5f);
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 break;
             case ActionType.Drink_Water:
                 CurrentAction.text = "Drinking Water"; 
+                transform.position = new Vector3(3.0f, 1.5f, 7.5f);
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 break;
             case ActionType.Eat_Meal:
                 CurrentAction.text = "Eating a Meal";
+                transform.position = new Vector3(-2.0f, 1.0f, 6.0f);
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 break;
             case ActionType.Eat_Snack:
                 CurrentAction.text = "Eating a Snack";
+                transform.position = new Vector3(0.0f, 1.5f, 7.5f);
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 break;
             case ActionType.Go_To_Bathroom:
                 CurrentAction.text = "Going to Bathroom";
+                transform.position = new Vector3(5.5f, 1.5f, 0.0f);
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 break;
             case ActionType.Sleep_In_Bed:
                 CurrentAction.text = "Seeping in the Bed";
+                transform.position = new Vector3(7.25f, 1.5f, 7f);
+                transform.rotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
                 break;
             case ActionType.Sleep_On_Couch:
                 CurrentAction.text = "Sleeping on the Couch";
+                transform.position = new Vector3(-6.6f, 1.5f, 2.3f);
+                transform.rotation = Quaternion.Euler(80.0f, 0.0f, 0.0f);
                 break;
             case ActionType.Do_Nothing:
                 CurrentAction.text = "Doing nothing";
+                transform.position = new Vector3(0.0f, 1.5f, 0.0f);
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 break;
             default:
                 CurrentAction.text = "ERROR!!";
@@ -76,15 +92,15 @@ public class Actor : MonoBehaviour
         }
     }
     //1 hour = SecondsPerHour seconds
-    const float SecondsPerHour = 5.0f;
+    const float SecondsPerHour = 2.0f;
     IEnumerator DecideAndDoAction()
     {
         //Debug.Log("Made to cooroutine");
         Action action = ChooseAction();
-        Act(action);
         foreach (Goal goal in goals)
             goal.passTime(action.getDuration());
         hoursPassed += action.getDuration();
+        Act(action);
         yield return new WaitForSeconds(action.getDuration() * SecondsPerHour);
         StartCoroutine(DecideAndDoAction());
     }
@@ -117,8 +133,8 @@ public class Actor : MonoBehaviour
 
         foreach(Goal goal in goals)
         {
-            float newValue = goal.getValue() + action.getGoalChange(goal);
-            newValue += action.getDuration() * goal.getChange();
+            float newValue = Mathf.Max(0.0f, goal.getValue() + action.getGoalChange(goal));
+            newValue += action.getDuration() * goal.getChange() * 0.25f;
             discontentment += goal.getDiscontentment(newValue);
         }
         return discontentment;

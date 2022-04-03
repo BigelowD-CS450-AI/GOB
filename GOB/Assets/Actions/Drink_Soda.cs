@@ -10,11 +10,11 @@ public class Drink_Soda : Action
         duration = .5f;
         goalChanges = new Dictionary<GoalType, float>
         {
-            {GoalType.Bathroom, 2 },
+            {GoalType.Bathroom, 1 },
             {GoalType.Depression, 1 },
             {GoalType.Eat, -1 },
             {GoalType.Sleep, 0 },
-            {GoalType.Thirst, 1 }
+            {GoalType.Thirst, -1 }
         };
     }
 }

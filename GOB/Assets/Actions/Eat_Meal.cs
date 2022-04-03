@@ -11,10 +11,10 @@ public class Eat_Meal : Action
         goalChanges = new Dictionary<GoalType, float>
         {
             {GoalType.Bathroom, 0 },
-            {GoalType.Depression, -3 },
-            {GoalType.Eat, -5 },
+            {GoalType.Depression, 1 },
+            {GoalType.Eat, -7 },
             {GoalType.Sleep, 1 },
-            {GoalType.Thirst, 1 }
+            {GoalType.Thirst, 0 }
         };
     }
 }

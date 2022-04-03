@@ -10,11 +10,11 @@ public class Sleep_On_Couch : Action
         duration = 1.5f;
         goalChanges = new Dictionary<GoalType, float>
         {
-            {GoalType.Bathroom, 0 },
-            {GoalType.Depression, 3 },
-            {GoalType.Eat, 0 },
-            {GoalType.Sleep, -2 },
-            {GoalType.Thirst, 0 }
+            {GoalType.Bathroom, -.5f },
+            {GoalType.Depression, 1 },
+            {GoalType.Eat, -.5f },
+            {GoalType.Sleep, -3 },
+            {GoalType.Thirst, -.5f }
         };
     }
 }

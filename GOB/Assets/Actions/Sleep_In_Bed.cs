@@ -13,7 +13,7 @@ public class Sleep_In_Bed : Action
             {GoalType.Bathroom, 0 },
             {GoalType.Depression, -2 },
             {GoalType.Eat, 0 },
-            {GoalType.Sleep, -5 },
+            {GoalType.Sleep, -100 },
             {GoalType.Thirst, 0 }
         };
     }

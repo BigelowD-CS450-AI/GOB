@@ -9,7 +9,7 @@ public abstract class Goal
     protected float change;
     public float getDiscontentment(float newValue)
     {
-        return newValue * newValue;
+        return Mathf.Sign(newValue) *  newValue * newValue;
     }
     public float getChange()
     {
@@ -21,11 +21,13 @@ public abstract class Goal
     }
     public void passTime(float passedTime)
     {
-        value = Mathf.Min(value + passedTime * change, 5);
+        //value = Mathf.Min(value + passedTime * change, 5);
+        value += passedTime * change;
     }
     public void changeInsistance(float changeAmount)
     {
-        value = Mathf.Clamp(value + changeAmount, 0.0f, 5.0f);
+        //value = Mathf.Clamp(value + changeAmount, 0.0f, 5.0f);
+        value = Mathf.Max(value + changeAmount, 0.0f);
     }
 }
 

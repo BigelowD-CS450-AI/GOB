@@ -11,9 +11,9 @@ public class Do_Nothing : Action
         goalChanges = new Dictionary<GoalType, float>
         {
             {GoalType.Bathroom, 0 },
-            {GoalType.Depression, 0.5f },
+            {GoalType.Depression, 0.0f },
             {GoalType.Eat, 0 },
-            {GoalType.Sleep, 0 },
+            {GoalType.Sleep, -.5f },
             {GoalType.Thirst, 0 }
         };
     }
